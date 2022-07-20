@@ -1,10 +1,59 @@
 import React from "react"
 import { InferGetServerSidePropsType } from "next"
-import { getGlobalCommands } from "services/discord"
+import { createGlobalCommand, getGlobalCommands } from "services/discord"
+import { ApplicationCommandType } from "discord-api-types/v10"
 
 export const getServerSideProps = async () => {
   try {
-    const { data } = await getGlobalCommands()
+    await createGlobalCommand({
+      name: "randompic",
+      description: "Get a random picture",
+      options: [
+        {
+          name: "type",
+          description: "Get a good random picture!",
+          type: 3,
+          required: true,
+          choices: [
+            { name: "cat", value: "cat" },
+            { name: "dog", value: "dog" },
+            { name: "generic", value: "picsum" },
+          ],
+        },
+      ],
+      type: ApplicationCommandType.ChatInput,
+      default_member_permissions: null
+    })
+    
+    await createGlobalCommand({
+      name: "ping",
+      description: "Ping pong! I'll respond with pong.",
+      type: ApplicationCommandType.ChatInput,
+      default_member_permissions: null
+    })
+    await createGlobalCommand({
+      name: "test",
+      description: "This is a testing command!",
+      type: ApplicationCommandType.ChatInput,
+      default_member_permissions: null
+    })
+
+    await createGlobalCommand({
+      name: "test2",
+      description: "TEST2 TEST2 TEST2",
+      type: ApplicationCommandType.ChatInput,
+      default_member_permissions: null
+    })
+
+    await createGlobalCommand({
+      name: "bool",
+      description: "edit this boolean command!",
+      type: ApplicationCommandType.ChatInput,
+      default_member_permissions: null
+    })
+
+    const { data } = await getGlobalCommands();
+    console.log(data);
     return { props: { data } }
   } catch (err) {
     console.error(err)

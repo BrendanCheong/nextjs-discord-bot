@@ -78,7 +78,12 @@ You could also make the request via Postman, curl, etc. but I'm lazy
 - Run `yarn dev`
 - Tunnel your localhost:3000 with a tool like [ngrok](https://ngrok.com/). `ngrok http 3000`
 - Add the `<YOUR_PUBLIC_TUNNELED_NGROK_URL>/api/interactions` as the `Interactions Endpoint URL` in your Discord app.
+- Note: If your `Interactions Endpoint URL` fails all of discords security checks, it cannot be
+  added! [See here](https://discord.com/developers/docs/interactions/receiving-and-responding#security-and-authorization)
 - Add the app to a server and slide in its DMs! Your registered slash commands should be available now.
+
+### Notes
+Each slash command added is stored within the corresponding guild/application id, similar to a database
 
 ### Deploy on Vercel
 
